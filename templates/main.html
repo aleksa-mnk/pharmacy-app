@@ -1,0 +1,57 @@
+{% block content %}
+<div class="content-section">
+	<form method="POST" action="/main">
+		{{  form.hidden_tag()  }}
+		<fieldset class="form-group">
+			<div class="form-group">
+				<label>Лекарство:</label>
+				<select name=medicinename method="GET" action="/">
+					{% for medicine in mname %}
+					<option value="{{medicine}}" SELECTED>{{medicine}}</option>"
+					{% endfor %}
+				</select>
+			</div>
+			<br>
+			<div class="form-group">
+				<label>Вид:</label>
+				<select name=drugtype method="GET" action="/">
+					{% for type in mtype %}
+					<option value="{{type}}" SELECTED>{{type}}</option>"
+					{% endfor %}
+				</select>
+			</div>
+			<br />
+			<div class="form-group">
+				{{  form.mquantity.label(class="form-control-label")  }}
+				{{  form.mquantity(class="form-control form-contol-lg")  }}
+			</div>
+			<br />
+			<div class="form-group">
+				<label>Доставка:</label>
+				<select name=deliverytype method="GET" action="/">
+					{% for type in delivery %}
+					<option value="{{type}}" SELECTED>{{type}}</option>"
+					{% endfor %}
+				</select>
+			</div>
+		</fieldset>
+		<div class="form-group">
+			{{  form.submit(class="btn btn-outline-info")  }}
+		</div>
+	</form>
+	<div class="row">
+		<div class="col-md-8">
+			{%  with messages = get_flashed_messages(with_categories=true)  %}
+			{%  if messages  %}
+			{%  for category, message in messages  %}
+			<div class="alert alert-{{  category  }}">
+				{{  message  }}
+			</div>
+			{%  endfor  %}
+			{%  endif  %}
+			{%  endwith  %}
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
